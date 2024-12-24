@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD - Firebase</title>
+
+    <!--LINKS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container p-5 mt-5">
+
+        <h1>Send Data to Firebase Database</h1>
+        <div class="form">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="3"></textarea>
+            </div>
+            <button>Submit</button>
+            <input class="btn btn-primary" onclick="sendData()" type="submit" value="Submit">
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- add firebase CDN -->
+    <!--<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-database-compat.js"></script>
+
+    <!--<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>-->
+    <!--<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-database-compat.js"></script>-->
+
+    <script>
+        const firebaseConfig = {
+            databaseURL: "https://crud-6ce2c-default-rtdb.firebaseio.com"
+        }
+        firebase.initializeApp(firebaseConfig)
+        // here connection is made to firbase
+        const database = firebase.database
+
+        // run function on click btn
+        const submit = document.querySelector('button')
+        submit.onclick = () => sendData()
+
+        // create a functin to send data
+        function sendData() {
+            var name = document.querySelectorAll('input')[0]
+            var email = document.querySelectorAll('input')[1]
+            var message = document.querySelectorAll('textarea')
+
+            // set path where data will store
+            var listRef = database.ref('messages/')
+            // but we need firebase generated unique id's to show list data so
+            // push() will generate unique id
+            var newRef = listRef.push()
+            //now set data in db on given path
+            newRef.set({
+                // now send our data
+                'name': name.value,
+                'email': email.value,
+                'message': message.value
+            })
+        }
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
+<!--
+<script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'
+
+    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'
+
+    // Add Firebase products that you want to use
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+</script>
+-->

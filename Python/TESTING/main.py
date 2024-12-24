@@ -1,0 +1,25 @@
+print("Welcome to my first program!!!")
+greeting = "You are welcome"
+print(greeting[0:4])
+print(len(greeting))
+
+print("A MAD LIBS GAME IN PYTHON PROGRAMMING")
+print("Let me tell you a story!")
+print("Kindly follow the prompt")
+
+name = input("Enter a name: ")
+place = input("Enter a place: ")
+school = input("Enter a school: ")
+hobby = input("Enter a hobby: ")
+fruit = input("Enter a fruit: ")
+food = input("Enter a food: ")
+color = input("Enter a color: ")
+movie = input("Enter a movie: ")
+
+print(" ")
+print("One upon a time, there was a student named", name + " and he lived in the city of", place)
+print(name + " was one of the brilliant student in", school)
+print(name + " loves ", hobby)
+print(name + " favourite food is", food + " and his favourite fruit is", fruit)
+print(name + " loves dresses with", color + " because it is his best color")
+print(movie + " is his favourite movie")
